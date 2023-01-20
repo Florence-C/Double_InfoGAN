@@ -1,0 +1,60 @@
+model : 'double_infogan'
+#model : 'double_infovaegan'
+dataset : 'dsprite'
+
+seed : "None"
+#seed : 872
+
+n_epoch : 5000
+
+batch_size : 128
+
+latent_distribution : 'normal' # choices : normal & uniform
+
+#img_size : 64  # size of each image dimension
+in_channels : 1 # number of image channels
+dec_channels : 32
+
+salient_latent_size : 15
+background_latent_size : 95
+
+cr : 
+   #use_cr : True
+   model : DCGAN
+   std : 0.1
+   gap : 0.0
+
+discriminator : 
+    model : 'DCGAN'
+    std: 0.2
+    
+generator : 
+    model : 'DCGAN'
+    act_fn : 'tanh'
+
+lr_g  : 0.00005  # adam : learning rate for generator
+lr_d  : 0.00005  # adam : learning rate for discriminator
+lr_cr : 0.00005  # adam : learning rate for CR net
+
+loop_g  : 2  # Generator steps
+loop_d  : 1  # Discriminator steps
+loop_cr : 1  # CR steps
+
+infoloss : 'l1' # choices : l1 ou gauss
+var : 1.0
+
+## Loss weights
+w_bg  : 0.5  #Weights for X and Y (to start training with X only for instance) 
+w_t   : 1.0
+wadv  : 0.5 # Loss weight for adversarial gan loss
+wi_z  : 1.0  # Loss weight for info (z reconstruction)
+wi_s  : 1.0  # Loss weight for info (s reconstruction)
+wc    : 0.5    # Loss weight for class loss
+wii   : 1.0   # Loss weight for image reconstruction loss
+wcr   : 1.0
+wi_real_s : 1.0
+#w_kl : 1.0
+
+save_img_epoch : 10
+save_img_linspace_epoch : 50
+save_ckpt : 50

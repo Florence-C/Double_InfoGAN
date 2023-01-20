@@ -1,0 +1,24 @@
+#model : 'mm_cvae_robin'
+model : 'mm_cvae'
+#model : 'cvae'
+dataset : 'cifar_mnist'
+#dataset : 'celeba'
+#dataset : 'dsprite'
+
+n_epoch : 1000
+
+batch_size : 128
+
+salient_latent_size : 100
+background_latent_size : 100
+
+background_disentanglement_penalty : 10000
+salient_disentanglement_penalty : 1000
+
+seed : 'None'
+
+save_img_epoch : 10
+
+
+#parser.add_argument('dataset', type=str, choices=['Epithel', 'CelebA', 'AML', 'Dsprite'])
+#parser.add_argument('model', type=str, choices=['mm_cvae', 'cvae', 'srb_vae', 'double_infogan'])

@@ -1,0 +1,4 @@
+
+preprocess/celeba_data/img_align_celeba/*
+
+eval/__pycache__/
