@@ -32,12 +32,7 @@ import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 
-
-# folder = "./results/double_infogan_cifar_mnist/lightning_logs/"
-# folder = "./results/double_infogan_cifar_mnist_latent_64_64/lightning_logs/"
-# folder = "./results/double_infogan_cifar_mnist_latent_100_100/lightning_logs/"
-folder = "./results/double_infogan_cifar_mnist_latent_64_64_noCR/lightning_logs/"
-
+folder = "./results/double_infogan_cifar_mnist/lightning_logs/"
 
 trainings = [
                 "version_265653/",
@@ -46,52 +41,6 @@ trainings = [
                 "version_265656/",
                 "version_265657/"
 ]
-
-# trainings = [
-#             #"version_238583/",
-#             #"version_240570/",
-#             #"version_240571/",
-#             #"version_240572/",
-#             #"version_240573/",
-#             #"version_240603/",
-#             #"version_240605/",
-#             #"version_240606/",
-#             #"version_240607/",
-#             #"version_240608/",
-#             "version_240614/",
-#             "version_240615/",
-#             "version_240616/",
-#             "version_240617/",
-#             "version_240618/",
-#             #"version_240645/",
-#             #"version_240646/",
-#             #"version_240647/",
-#             #"version_240648/",
-#             #"version_240649/"
-#             ]
-
-# trainings = [
-#             "version_240684/",
-#             "version_240685/",
-#             "version_240686/",
-#             "version_240687/",
-#             "version_240688/"
-#             # "version_240690/",
-#             # "version_240691/",
-#             # "version_240692/",
-#             # "version_240693/",
-#             # "version_240694/",
-#             # "version_240702/",
-#             # "version_240703/",
-#             # "version_240704/",
-#             # "version_240705/",
-#             # "version_240706/",
-#             # "version_240733/",
-#             # "version_240734/",
-#             # "version_240736/",
-#             # "version_240737/",
-#             # "version_240738/"
-#             ]
 
 checkpoints = [
         "checkpoints/epoch=51-step=19999.ckpt",
@@ -116,9 +65,6 @@ for training_name in trainings:
         model.to(device)
 
         D = model.discriminator
-
-
-        D.training = False
 
         cifar_mnist_labels_cifar_eval = np.load("datasets/cifar_mnist_labels_cifar_eval.npy", allow_pickle=True)
         cifar_mnist_labels_mnist_eval = np.load("datasets/cifar_mnist_labels_mnist_eval.npy", allow_pickle=True)
@@ -176,9 +122,6 @@ for training_name in trainings:
         labels_cifar = np.array(labels_cifar)
         I = np.array(I)
 
-        # print(labels)
-        # print(S)
-
 
         clf = LogisticRegression()
         scores_s_mnist = cross_val_score(clf, S[labels_mnist > -1], labels_mnist[labels_mnist>-1], cv=5)
@@ -200,10 +143,9 @@ for training_name in trainings:
 
         with open(txt_file, 'a') as f:
             f.write('ckpt : ' + ckpt + '\n')
-            f.write('D training ? : ' + str(D.training))
             f.write('\n')
             f.write('cross validation \n')
-            #f.write(str(scores_s) + '\n')
+
             f.write('accuracy mnist classif in S : cross validation 5 folds : ' + str(scores_s_mnist.mean()) + ' and standart deviation : ' + str(scores_s_mnist.std()) + '\n')
             f.write('accuracy mnist classif in Z : cross validation 5 folds : ' + str(scores_z_mnist.mean()) + ' and standart deviation : ' + str(scores_z_mnist.std()) + '\n')
             f.write('accuracy cifar classif in S : cross validation 5 folds : ' + str(scores_s_cifar.mean()) + ' and standart deviation : ' + str(scores_s_cifar.std()) + '\n')

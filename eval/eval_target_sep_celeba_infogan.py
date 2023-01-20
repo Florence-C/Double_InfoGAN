@@ -27,9 +27,8 @@ import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 
-#folder = "./results/double_infogan_celeba_DCGAN_vf/lightning_logs/"
-#folder = "./results/double_infogan_celeba_DCGAN_variabilite/lightning_logs/"
-folder = "./results/double_infogan_celeba_DCGAN_noCR/lightning_logs/"
+
+folder = "./results/double_infogan_celeba/lightning_logs/"
 
 
 training_list = ["version_232307/",
@@ -107,7 +106,6 @@ for training_name in training_list :
 
         with open(txt_file, 'a') as f:
             f.write('ckpt : ' + ckpt + '\n')
-            f.write('D training ? : ' + str(D.training))
             f.write('\n')
             f.write('cross validation \n')
             f.write(str(scores_s) + '\n')

@@ -28,7 +28,7 @@ import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 
-folder = "./results/mmcvae_cifar_latent_64_64/lightning_logs/"
+folder = "./results/mmcvae_cifar_latent/lightning_logs/"
 
 
 trainings = [
@@ -54,7 +54,6 @@ for training_name in trainings :
                         salient_disentanglement_penalty=10e2)
 
                 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-                print(device)
 
                 model.to(device)
 
@@ -126,7 +125,6 @@ for training_name in trainings :
                     f.write('ckpt : ' + ckpt + '\n')
                     f.write('\n')
                     f.write('cross validation \n')
-                    #f.write(str(scores_s) + '\n')
                     f.write('accuracy mnist classif in S : cross validation 5 folds : ' + str(scores_s_mnist.mean()) + ' and standart deviation : ' + str(scores_s_mnist.std()) + '\n')
                     f.write('accuracy mnist classif in Z : cross validation 5 folds : ' + str(scores_z_mnist.mean()) + ' and standart deviation : ' + str(scores_z_mnist.std()) + '\n')
                     f.write('accuracy cifar classif in S : cross validation 5 folds : ' + str(scores_s_cifar.mean()) + ' and standart deviation : ' + str(scores_s_cifar.std()) + '\n')

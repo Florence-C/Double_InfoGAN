@@ -17,7 +17,6 @@ from data import CelebADataset, CelebADataset2, GridMnistDspriteDataset
 
 from utils import set_seeds
 
-
 import matplotlib.pyplot as plt
 from torchvision.utils import save_image, make_grid
 import torchvision.transforms as transforms
@@ -25,35 +24,18 @@ import torchvision.transforms as transforms
 from metrics import FactorVAEMetricDouble
 
 
-folder = "./results/double_infogan_dsprite_vf/lightning_logs/"
+folder = "./results/double_infogan_dsprite/lightning_logs/"
 
-trainings = [ 
-                #"version_1266114/",
-                #"version_1266171_wadv025/", 
-                #"version_1266194_wiz05/", 
-                # "version_1266252_bs256/", 
-                # "version_1266259_bs512/", 
-                # "version_1266283_bs1024/", 
+trainings = [  
                 "version_1303407/", 
-                "version_1303456/", 
-                # "version_1306222/",
-                # "version_1458924_salientDim10/", 
-                # "version_1459366_salientDim10/",
-                # "version_1459986_salientDim15/"
-
+                "version_1303456/"
 ]
 
 checkpoints = [
                 "checkpoints/epoch=50-step=57999.ckpt",
                 "checkpoints/epoch=100-step=114999.ckpt",
-                "checkpoints/epoch=150-step=172999.ckpt",
-                # "checkpoints/epoch=347-step=49999.ckpt", 
-                # "checkpoints/epoch=436-step=249999.ckpt", 
-                # "checkpoints/epoch=522-step=149999.ckpt",
-                # "checkpoints/epoch=694-step=99999.ckpt"
+                "checkpoints/epoch=150-step=172999.ckpt"
                 ]
-# training_name = "version_1253204_inputN_wadv05_wbg05/"
-# ckpt = "checkpoints/epoch=130-step=149999.ckpt"
 
 for training_name in trainings : 
     for ckpt in checkpoints : 
@@ -67,13 +49,6 @@ for training_name in trainings :
         print(device)
 
         D.to(device)
-
-
-        print('D training ? ', D.training)
-
-        #D.training = False
-
-        print('D training ? ', D.training)
 
         metric_data_groups = np.load("datasets/metric_data_groups_gridmnist_dsprite.npy", allow_pickle=True)
 
@@ -89,7 +64,6 @@ for training_name in trainings :
 
         with open(txt_file, 'a') as f:
             f.write('ckpt : ' + ckpt + '\n')
-            f.write('D training ? : ' + str(D.training))
             f.write('\n')
             f.write('fvae : ')
             f.write(str(metric['factorVAE_metric']))

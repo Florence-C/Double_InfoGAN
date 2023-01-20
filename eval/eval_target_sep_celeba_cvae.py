@@ -28,15 +28,11 @@ import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score, cross_validate
 
-folder = "./results/cvae_celeba_1000epochs_latent_6_16/lightning_logs/"
+folder = "./results/cvae_celeba_/lightning_logs/"
 
 training_name = "version_115092/"
 
 ckpt = "checkpoints/epoch=95-step=14999.ckpt"
-ckpt = "checkpoints/epoch=191-step=29999.ckpt"
-ckpt = "checkpoints/epoch=318-step=49999.ckpt"
-ckpt = "checkpoints/epoch=414-step=64999.ckpt"
-ckpt = "checkpoints/epoch=509-step=79999.ckpt"
 
 
 model = Conv_cVAE.load_from_checkpoint(folder + training_name + ckpt, background_disentanglement_penalty=10e3,
@@ -46,7 +42,6 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(device)
 
 model.to(device)
-
 
 total_ids = np.load("datasets/celeba_ids_eval.npy")
 total_labels = np.load("datasets/celeba_labels_eval.npy")
