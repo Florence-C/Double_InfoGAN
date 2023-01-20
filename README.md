@@ -18,14 +18,6 @@ In folder preprocess you can find all the codes to create the datasets (celeba, 
 python -m preprocess.preprocess_datasetName
 ```
 
-For celeba, download the celeba dataset and put the images in preproces/celeba_data/img_align_celeba
-
-
-Dowload dsprites_ndarray_co1sh3sc6or40x32y32_64x64.npz from the repo [dsprites-dataset](https://github.com/deepmind/dsprites-dataset)
-
-For Brats Dataset, images (https://www.med.upenn.edu/cbica/brats2020/data.html) must be splitted in healty and cancerous. 
-
-
 ### Training code
 
 The training code is run_experiment.py. To launch the code, select a config file and chose a directory to store the results and run : 

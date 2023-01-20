@@ -581,6 +581,6 @@ def create_eval_data(dir):
 if __name__ == "__main__":
 
 
-    #create_gridMnist_dsprite_bg_target('../../../Data')
+    create_gridMnist_dsprite_bg_target('./dsprite_data')
 
-    metric_data = create_eval_data('../../../Data')
+    metric_data = create_eval_data('./dsprite_data')
